@@ -1,0 +1,25 @@
+{% load socialaccount %}
+{% if user and not user.is_anonymous %}
+
+    <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+    Биография юзера:<br>
+    <br>
+    {% for key, val in profile.items %}
+        {{ key }} - {{ val }}<br>
+    {% endfor %}
+
+    <hr>
+
+    Все друзяшки:<br>
+    {% for friend in friends %}
+        {{ friend }}{% if forloop.last %}.{% else %}, {% endif %}
+    {% endfor %}
+    <hr>
+    <br>
+    <a href="/accounts/logout/">Выйти?</a>
+
+{% else %}
+
+    <a href="{% provider_login_url "vk" method="oauth2" %}"> Войти через VK </a>
+
+{% endif %}

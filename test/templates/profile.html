@@ -1,0 +1,34 @@
+<head>
+    <script type="text/javascript">
+        var count = 6;
+        var redirect = "/";
+
+        function countDown(){
+            var timer = document.getElementById("timer");
+            if(count > 0){
+                count--;
+                timer.innerHTML = "Через "+count+" секунд вы будете перенаправлены на страницу вашего профиля";
+                setTimeout("countDown()", 1000);
+            }else{
+                window.location.href = redirect;
+            }
+        }
+    </script>
+</head>
+Добро пожаловать, {{ user.first_name }} {{ user.last_name }} !
+
+<hr>
+Пятерочка друзей:
+{% for friend in friends %}
+    {{ friend }}{% if forloop.last %}.{% else %}, {% endif %}
+{% endfor %}
+<hr>
+<br>
+
+<span id="timer">
+<script type="text/javascript">countDown();</script>
+</span>
+<br>
+<hr>
+<a href="/accounts/logout/">Выйти?</a>
+
